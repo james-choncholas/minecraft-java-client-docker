@@ -14,6 +14,7 @@ do
   fi
 done
 
+xhost +
 sudo docker run -it --rm \
     --name firefox-bare \
     --env=USER_UID=${USER_UID} \
@@ -26,7 +27,8 @@ sudo docker run -it --rm \
     --env PULSE_SERVER=/run/pulse/native \
     --volume /home/$USER/.minecraft:/root/.minecraft \
     -v /dev/shm:/dev/shm \
-    -d minecraft-java-client $@
+    minecraft-java-client $@
+xhost -
 
 # note all of shm must be mounted
     #--shm-size 2g \
